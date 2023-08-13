@@ -14,7 +14,7 @@ function App() {
 
   const getOneCallData = useCallback(async () => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/onecall?lat=${
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${
         location.loaded ? location.coordinates.lat : 51.5074
       }&lon=${location.loaded ? location.coordinates.lng : 0.1278}&appid=${
         process.env.REACT_APP_API_KEY
@@ -32,6 +32,7 @@ function App() {
         setError(null);
       })
       .catch((err) => {
+        console.log(err.message);
         setError(err.message);
         setLoading(false);
       });
@@ -40,7 +41,7 @@ function App() {
 
   const getForecastData = useCallback(async () => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?lat=${
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${
         location.loaded ? location.coordinates.lat : 51.5074
       }&lon=${location.loaded ? location.coordinates.lng : 0.1278}&appid=${
         process.env.REACT_APP_API_KEY
@@ -57,13 +58,14 @@ function App() {
         setError(null);
       })
       .catch((err) => {
+        console.log(err.message);
         setError(err.message);
       });
   }, [location]);
 
   const getData = async (lat, lon) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -77,6 +79,7 @@ function App() {
         setError(null);
       })
       .catch((err) => {
+        console.log(err.message);
         setError(err.message);
         setLoading(false);
       });
@@ -85,7 +88,7 @@ function App() {
 
   const getSearchData = async (city) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -99,6 +102,7 @@ function App() {
         setError(null);
       })
       .catch((err) => {
+        console.log(err.message);
         setError(err.message);
       });
   };
